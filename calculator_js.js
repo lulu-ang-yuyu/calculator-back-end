@@ -10,6 +10,12 @@ var specialFuncNum = 0;
 
 function mycalculator(num) {
 
+    document.getElementById("funcParam1").style.display="inline";
+    document.getElementById("amount1").style.display="inline";
+    document.getElementById("funcParam2").style.display="inline";
+    document.getElementById("amount2").style.display="inline";
+    document.getElementById("funcParam3").style.display="inline";
+    document.getElementById("amount3").style.display="inline";
 
     document.getElementById("funcParam4").style.display="inline";
     document.getElementById("amount4").style.display="inline";
@@ -23,7 +29,6 @@ function mycalculator(num) {
             document.getElementById('funcParam1').innerHTML = "d0-本期每股分红";
             document.getElementById('funcParam2').innerHTML = "g-股息增长率";
             document.getElementById('funcParam3').innerHTML = "p0-本期股价";
-
             document.getElementById("funcParam4").style.display="none";
             document.getElementById("amount4").style.display="none";
             document.getElementById("funcParam5").style.display="none";
@@ -126,10 +131,10 @@ function mycalculator(num) {
 
         }break;
     }
-    var paramS = new Array();
-    paramS[0] = "Saab";
-    paramS[1] = "Volvo";
-    paramS[2] = "BMW";
+    // var paramS = new Array();
+    // paramS[0] = "Saab";
+    // paramS[1] = "Volvo";
+    // paramS[2] = "BMW";
 
 
     specialCalculat(paramS)
