@@ -39,7 +39,7 @@ function mycalculator(num) {
         {
             document.getElementById('funcIntroduce').innerHTML = "DGM法：这是一个基于现金流的权益成本算法，适用于股价可以公允价值计量且每年都有股息分红的公司，它假设股息增长率固定不变";
             document.getElementById('funcParam1').innerHTML = "请输入本期每股分红";
-            document.getElementById('funcParam2').innerHTML = "请输入股息增长率";
+            document.getElementById('funcParam2').innerHTML = "请输入股息增长率(小数形式)";
             document.getElementById('funcParam3').innerHTML = "请输入本期股价";
             document.getElementById("funcParam4").style.display="none";
             document.getElementById("amount4").style.display="none";
@@ -51,8 +51,8 @@ function mycalculator(num) {
         case 2:
         {
             document.getElementById('funcIntroduce').innerHTML = "CAPM法：该方法假设所有投资者都以证券投资组合的方式进行投资，从而分散非系统性风险，剩下不能被分散的系统风险。CAPM模型计算一个最低回报率来补偿系统性风险。";
-            document.getElementById('funcParam1').innerHTML = "请输入无风险利率";
-            document.getElementById('funcParam2').innerHTML = "请输入市场利率";
+            document.getElementById('funcParam1').innerHTML = "请输入无风险利率(小数形式)";
+            document.getElementById('funcParam2').innerHTML = "请输入市场利率(小数形式)";
             document.getElementById('funcParam3').innerHTML = "请输入该个股对于整个资本市场波动的敏感性";
             document.getElementById("funcParam4").style.display="none";
             document.getElementById("amount4").style.display="none";
@@ -87,7 +87,7 @@ function mycalculator(num) {
             document.getElementById('funcIntroduce').innerHTML = "DCF：利用未来现金流的现值来对公司进行估值。";
             document.getElementById('funcParam1').innerHTML = "请输入未来现金流持续年限";
             document.getElementById('funcParam2').innerHTML = "请输入第n年产生的现金流";
-            document.getElementById('funcParam3').innerHTML = "请输入年利率";
+            document.getElementById('funcParam3').innerHTML = "请输入市场利率(小数形式)";
             document.getElementById("funcParam4").style.display="none";
             document.getElementById("amount4").style.display="none";
             document.getElementById("funcParam5").style.display="none";
@@ -96,7 +96,7 @@ function mycalculator(num) {
         }break;
         case 6:
         {
-            document.getElementById('funcIntroduce').innerHTML = "DIE估值：适用于未上市公司（或股价不能被公允计量的公司），相似公司的经营模式、经营杠杆、财务杠杆都要与该公司接近。";
+            document.getElementById('funcIntroduce').innerHTML = "P/E估值：适用于未上市公司（或股价不能被公允计量的公司），相似公司的经营模式、经营杠杆、财务杠杆都要与该公司接近。";
             document.getElementById('funcParam1').innerHTML = "请输入相似公司的P/E值";
             document.getElementById('funcParam2').innerHTML = "请输入公司的预测年净收入";
             document.getElementById("funcParam3").style.display="none";
@@ -112,8 +112,8 @@ function mycalculator(num) {
             document.getElementById('funcIntroduce').innerHTML = "远期汇率合约：该方法用本国的和他国的通胀指数来预测远期汇率，并生成一个合约，将未来汇率固定为远期汇率。";
             document.getElementById('funcParam1').innerHTML = "请输入现金流在几个月后流入/出";
             document.getElementById('funcParam2').innerHTML = "请输入以外币形式表现的未来现金流";
-            document.getElementById('funcParam3').innerHTML = "请输入本国年利率";
-            document.getElementById("funcParam4").innerHTML="请输入外国年利率";
+            document.getElementById('funcParam3').innerHTML = "请输入本国年利率(小数形式)";
+            document.getElementById("funcParam4").innerHTML="请输入外国年利率(小数形式)";
             document.getElementById("funcParam5").innerHTML="请输入即期汇率";
 
         }break;
@@ -123,8 +123,8 @@ function mycalculator(num) {
             document.getElementById('funcParam1').innerHTML = "请输入未来流入现金流";
             document.getElementById('funcParam2').innerHTML = "预计几个月后收钱";
             document.getElementById('funcParam3').innerHTML = "请输入即期汇率";
-            document.getElementById("funcParam4").innerHTML="请输入外币借款利率";
-            document.getElementById("funcParam5").innerHTML="请输入本币存款利率";
+            document.getElementById("funcParam4").innerHTML="请输入外币借款利率(小数形式)";
+            document.getElementById("funcParam5").innerHTML="请输入本币存款利率(小数形式)";
 
         }break;
         case 9:
@@ -133,10 +133,20 @@ function mycalculator(num) {
             document.getElementById('funcParam1').innerHTML = "CF-未来流出现金流";
             document.getElementById('funcParam2').innerHTML = "n-预计几个月后收钱";
             document.getElementById('funcParam3').innerHTML = "spot rate-即期汇率";
-            document.getElementById("funcParam4").innerHTML="i1-外币存款利率";
-            document.getElementById("funcParam5").innerHTML="i2-本币借款利率";
+            document.getElementById("funcParam4").innerHTML="i1-外币存款利率(小数形式)";
+            document.getElementById("funcParam5").innerHTML="i2-本币借款利率(小数形式)";
 
         }break;
+        case 10:
+        {
+             document.getElementById('funcIntroduce').innerHTML = "不可赎回债券:该方法利用两个不同折现率来折现每年流出现金流从而估计债券成本,不要求公允价值能被可靠计量";
+             document.getElementById('funcParam1').innerHTML = "请输入每年利息";
+             document.getElementById('funcParam2').innerHTML = "请输入未来现金流持续的时间";
+             document.getElementById('funcParam3').innerHTML = "请输入预计最小成本(小数形式)";
+             document.getElementById("funcParam4").innerHTML="请输入预计最大成本(小数形式)";
+             document.getElementById("funcParam5").innerHTML="请输入债券面值";
+
+        }
     }
     // var paramS = new Array();
     // paramS[0] = "Saab";
@@ -202,8 +212,8 @@ function specialCalculat() {
                 printfError();return;
             }
 
-            // 对应公式 Kd=i(1-t)/p0
-            var result = amount1*(1-amount2)/amount3;
+            // 对应公式 Kd=i*pv*(1-t)/p0
+            var result = amount1*amount4*(1-amount2)/amount3;
             document.getElementById('functionRusult').value = result.toFixed(2);
         }break;
         case 4:
@@ -214,13 +224,19 @@ function specialCalculat() {
         }break;
         case 5:
         {
-            if (amount3 == 0)
-            {
-                printfError();return;
-            }
+           //用一个数组存放每年现金流流入
+           var myCFs=new Array();
+           //把每年现金流现值加起来
+           for(var i=0;i<amount1;i++)
+           {
+             document.getElementById('funcParam2').innerHTML = "请顺序输入每年现金流";
+             myCFs[i] = amount2;
+             var result = myCFs[i]/Math.pow((1+amount3),i) + result;
 
+           }
+            document.getElementById('functionRusult').value = result.toFixed(2);
 
-        }break;
+       }break;
         case 6:
         {
 
@@ -249,7 +265,9 @@ function specialCalculat() {
             // Current borrowing=CF/(1+i1*(n/12))	/*现在要借的外币*/
             // Domestic currency=current borrowing/spot rate      /*把借来的外币换成本币*/
             // Future domestic currency= Domestic currency*(1+i2*(n/12))
-            var result = ((amount1/(1+amount4*(amount2/12))) /amount3)*(1+amount4*(amount2/12)) ;
+            var CB = amount1/(1+amount4*(amount2/12));
+            var DC = CB/amount3;
+            var result = DC*(1+amount5*(amount2/12));
             document.getElementById('functionRusult').value = result.toFixed(2);
 
         }break;
@@ -259,8 +277,28 @@ function specialCalculat() {
             {
                 printfError();return;
             }
-            // 公式同8，所以不解释公式了
-            var result = ((amount1/(1+amount4*(amount2/12))) /amount3)*(1+amount4*(amount2/12)) ;
+            // current lending=CF/(1+外币存款利率*(n/12));
+            //domestic currency=current lending/spot rare;
+            //future domestic currency=domestic currency*(1+本币借款利率*(n/12));
+
+           var CL = amount1/(amount4*(amount2/12));
+           var DC = CL/amount3;
+           var result = DC*(1+amount5*(amount2/12));
+           document.getElementById('functionRusult').value = result.toFixed(2);
+        }break;
+        case 10:
+        {
+          //用一个数组存放每年现金流流入
+           var myCFs=new Array();
+          //把每年现金流现值加起来
+           for(var i=0;i<amount2;i++)
+           {
+              myCFs[i] = amount5*amount1;
+              var NPVa= myCFs[i]/Math.pow((1+amount3),i) + result;
+              var NPVb = myCFs[i]/Math.pow((1+amount4),i) + result;
+
+           }
+            var result = amount3+(NPVa/(NPVb-NPVa))*(amount4-amount3);
             document.getElementById('functionRusult').value = result.toFixed(2);
         }break;
     }
