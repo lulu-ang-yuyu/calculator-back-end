@@ -142,7 +142,7 @@ function mycalculator(num) {
              document.getElementById('funcIntroduce').innerHTML = "不可赎回债券:该方法利用两个不同折现率来折现每年流出现金流从而估计债券成本,不要求公允价值能被可靠计量";
              document.getElementById('funcParam1').innerHTML = "请输入每年利息";
              document.getElementById('funcParam2').innerHTML = "请输入未来现金流持续的时间";
-             document.getElementById('funcParam3').innerHTML = "请输入预计最小成本(小数形式)";
+             document.getElementById('funcParam3').innerHTML = "请输入预计最小成本(小数形式);
              document.getElementById("funcParam4").innerHTML="请输入预计最大成本(小数形式)";
              document.getElementById("funcParam5").innerHTML="请输入债券面值";
 
