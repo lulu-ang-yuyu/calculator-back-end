@@ -86,7 +86,7 @@ function mycalculator(num) {
 
             document.getElementById('funcIntroduce').innerHTML = "DCF：利用未来现金流的现值来对公司进行估值。";
             document.getElementById('funcParam1').innerHTML = "请输入未来现金流持续年限";
-            document.getElementById('funcParam2').innerHTML = "请输入第n年产生的现金流";
+            document.getElementById('funcParam2').innerHTML = "请输入每年产生的现金流, 分号间隔";
             document.getElementById('funcParam3').innerHTML = "请输入市场利率(小数形式)";
             document.getElementById("funcParam4").style.display="none";
             document.getElementById("amount4").style.display="none";
@@ -109,42 +109,42 @@ function mycalculator(num) {
         }break;
         case 7:
         {
-            document.getElementById('funcIntroduce').innerHTML = "远期汇率合约：该方法用本国的和他国的通胀指数来预测远期汇率，并生成一个合约，将未来汇率固定为远期汇率。输出结果为以本币形式表现的未来现金流流出/入";
+            document.getElementById('funcIntroduce').innerHTML = "远期汇率合约：该方法用本国的和他国的通胀指数来预测远期汇率，并生成一个合约，将未来汇率固定为远期汇率。";
             document.getElementById('funcParam1').innerHTML = "请输入现金流在几个月后流入/出";
             document.getElementById('funcParam2').innerHTML = "请输入以外币形式表现的未来现金流";
             document.getElementById('funcParam3').innerHTML = "请输入本国年利率(小数形式)";
             document.getElementById("funcParam4").innerHTML="请输入外国年利率(小数形式)";
-            document.getElementById("funcParam5").innerHTML="请输入即期汇率(本币对外币)";
+            document.getElementById("funcParam5").innerHTML="请输入即期汇率";
 
         }break;
         case 8:
         {
-            document.getElementById('funcIntroduce').innerHTML = "货币市场对冲策略：这是一个有点复杂的三言两语讲不太清的方法。输出结果为以本币表示的未来现金流流入";
+            document.getElementById('funcIntroduce').innerHTML = "货币市场对冲策略：这是一个有点复杂的三言两语讲不太清的方法。";
             document.getElementById('funcParam1').innerHTML = "请输入未来流入现金流";
             document.getElementById('funcParam2').innerHTML = "预计几个月后收钱";
-            document.getElementById('funcParam3').innerHTML = "请输入即期汇率(本币对外币)";
+            document.getElementById('funcParam3').innerHTML = "请输入即期汇率";
             document.getElementById("funcParam4").innerHTML="请输入外币借款利率(小数形式)";
             document.getElementById("funcParam5").innerHTML="请输入本币存款利率(小数形式)";
 
         }break;
         case 9:
         {
-            document.getElementById('funcIntroduce').innerHTML = "货币市场对冲策略：这是一个有点复杂的三言两语讲不太清的方法。输出结果为以本币表示的未来现金流流出";
-            document.getElementById('funcParam1').innerHTML = "请输入未来流出现金流";
-            document.getElementById('funcParam2').innerHTML = "预计几个月后收钱";
-            document.getElementById('funcParam3').innerHTML = "请输入即期汇率(人民币对外币)";
+            document.getElementById('funcIntroduce').innerHTML = "货币市场对冲策略：这是一个有点复杂的三言两语讲不太清的方法。";
+            document.getElementById('funcParam1').innerHTML = "CF-未来流出现金流";
+            document.getElementById('funcParam2').innerHTML = "n-预计几个月后收钱";
+            document.getElementById('funcParam3').innerHTML = "spot rate-即期汇率";
             document.getElementById("funcParam4").innerHTML="i1-外币存款利率(小数形式)";
             document.getElementById("funcParam5").innerHTML="i2-本币借款利率(小数形式)";
 
         }break;
         case 10:
         {
-             document.getElementById('funcIntroduce').innerHTML = "不可赎回债券:该方法利用两个不同折现率来折现每年流出现金流从而估计债券成本,不要求公允价值能被可靠计量";
+             document.getElementById('funcIntroduce').innerHTML = "可赎回债券:该方法利用两个不同折现率来折现每年流出现金流从而估计债券成本,不要求公允价值能被可靠计量";
              document.getElementById('funcParam1').innerHTML = "请输入每年利息";
              document.getElementById('funcParam2').innerHTML = "请输入未来现金流持续的时间";
              document.getElementById('funcParam3').innerHTML = "请输入预计最小成本(小数形式)";
              document.getElementById("funcParam4").innerHTML="请输入预计最大成本(小数形式)";
-             document.getElementById("funcParam5").innerHTML="请输入税率(小数形式)";
+             document.getElementById("funcParam5").innerHTML="请输入债券面值";
 
         }
     }
@@ -225,14 +225,12 @@ function specialCalculat() {
         case 5:
         {
            //用一个数组存放每年现金流流入
-           var myCFs=new Array();
+           var myCFs = document.getElementById('amount2').value.split(";");
+		   var result = 0;
            //把每年现金流现值加起来
            for(var i=0;i<amount1;i++)
            {
-             document.getElementById('funcParam2').innerHTML = "请顺序输入每年现金流";
-             myCFs[i] = amount2;
-             var result = myCFs[i]/Math.pow((1+amount3),i) + result;
-
+             result += myCFs[i]/Math.pow((1+amount3),i);
            }
             document.getElementById('functionRusult').value = result.toFixed(2);
 
@@ -251,7 +249,7 @@ function specialCalculat() {
                 printfError();return;
             }
             // 对应公式 forward rate=spot rate*[(1+i2*(n/12))/(1+i1*(n/12))]
-            var result = amount2*(amount5 *((1+amount3*(amount1/12))/(1+amount4*(amount1/12))));
+            var result = amount5 *((1+amount4*(amount1/12))/(1+amount3*(amount1/12)));
             document.getElementById('functionRusult').value = result.toFixed(2);
 
         }break;
@@ -266,7 +264,7 @@ function specialCalculat() {
             // Domestic currency=current borrowing/spot rate      /*把借来的外币换成本币*/
             // Future domestic currency= Domestic currency*(1+i2*(n/12))
             var CB = amount1/(1+amount4*(amount2/12));
-            var DC = CB*amount3;
+            var DC = CB/amount3;
             var result = DC*(1+amount5*(amount2/12));
             document.getElementById('functionRusult').value = result.toFixed(2);
 
@@ -282,20 +280,21 @@ function specialCalculat() {
             //future domestic currency=domestic currency*(1+本币借款利率*(n/12));
 
            var CL = amount1/(amount4*(amount2/12));
-           var DC = CL*amount3;
+           var DC = CL/amount3;
            var result = DC*(1+amount5*(amount2/12));
            document.getElementById('functionRusult').value = result.toFixed(2);
         }break;
         case 10:
         {
           //用一个数组存放每年现金流流入
-           var myCFs=new Array();
+           var myCFs=document.getElementById('amount1').value.split(";");
+		   var NPVa = 0, NPVb = 0;
           //把每年现金流现值加起来
            for(var i=0;i<amount2;i++)
            {
-              myCFs[i] = (1-amount5)*amount1;
-              var NPVa= myCFs[i]/Math.pow((1+amount3),i) + result;
-              var NPVb = myCFs[i]/Math.pow((1+amount4),i) + result;
+              myCFs[i] = amount5*myCFs[i];
+              NPVa += myCFs[i]/Math.pow((1+amount3),i);
+              NPVb += myCFs[i]/Math.pow((1+amount4),i);
 
            }
             var result = amount3+(NPVa/(NPVb-NPVa))*(amount4-amount3);
