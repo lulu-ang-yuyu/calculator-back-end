@@ -144,7 +144,7 @@ function mycalculator(num) {
              document.getElementById('funcParam2').innerHTML = "请输入未来现金流持续的时间";
              document.getElementById('funcParam3').innerHTML = "请输入预计最小成本(小数形式)";
              document.getElementById("funcParam4").innerHTML="请输入预计最大成本(小数形式)";
-             document.getElementById("funcParam5").innerHTML="请输入债券面值";
+             document.getElementById("funcParam5").innerHTML="请输入目前债券市场价";
 
         }
     }
@@ -230,7 +230,7 @@ function specialCalculat() {
            //把每年现金流现值加起来
            for(var i=0;i<amount1;i++)
            {
-             result += myCFs[i]/Math.pow((1+amount3),i);
+             result += myCFs[i]/Math.pow((1+amount3),i+1);
            }
             document.getElementById('functionRusult').value = result.toFixed(2);
 
@@ -287,14 +287,15 @@ function specialCalculat() {
         case 10:
         {
           //用一个数组存放每年现金流流入
-           var myCFs=document.getElementById('amount1').value.split(";");
-		   var NPVa = 0, NPVb = 0;
+           var PVa = 0, PVb = 0, NPVa = 0, NPVb = 0;
           //把每年现金流现值加起来
            for(var i=0;i<amount2;i++)
            {
-              myCFs[i] = amount5*myCFs[i];
-              NPVa += myCFs[i]/Math.pow((1+amount3),i);
-              NPVb += myCFs[i]/Math.pow((1+amount4),i);
+              var myCFs = amount1;
+              PVa += myCFs/Math.pow((1+amount3),i+1);
+              NPVa = PVa - amount5;
+              PVb += myCFs/Math.pow((1+amount4),i+1);
+              NPVb = PVb - amount5;
 
            }
             var result = amount3+(NPVa/(NPVb-NPVa))*(amount4-amount3);
