@@ -9,7 +9,7 @@ var quit=0; //防止重复按键的标志
 var functionNum =0; //判断当前的
 var specialFuncNum = 0;
 
-
+//控制第三个板块的界面显示的函数
 function mycalculator(num) {
 
     functionNum = num;
@@ -20,9 +20,10 @@ function mycalculator(num) {
     document.getElementById('amount3').value = '';
     document.getElementById('amount4').value = '';
     document.getElementById('amount5').value = '';
+    document.getElementById('amount6').value = '';
     document.getElementById('functionRusult').value = '';
 
-    // 让所有的输入框都出现(不再是隐身状况)
+    // 让所有的输入框都出现
     document.getElementById("funcParam1").style.display="inline";
     document.getElementById("amount1").style.display="inline";
     document.getElementById("funcParam2").style.display="inline";
@@ -33,6 +34,10 @@ function mycalculator(num) {
     document.getElementById("amount4").style.display="inline";
     document.getElementById("funcParam5").style.display="inline";
     document.getElementById("amount5").style.display="inline";
+    document.getElementById("funcParam6").style.display="inline";
+    document.getElementById("amount6").style.display="inline";
+
+    //根据点击按钮的不同来显示不同的界面
     switch (num)
     {
         case 1:
@@ -45,7 +50,9 @@ function mycalculator(num) {
             document.getElementById("amount4").style.display="none";
             document.getElementById("funcParam5").style.display="none";
             document.getElementById("amount5").style.display="none";
-            // 参数
+            document.getElementById("funcParam6").style.display="none";
+            document.getElementById("amount6").style.display="none";
+
 
         }break;
         case 2:
@@ -58,6 +65,8 @@ function mycalculator(num) {
             document.getElementById("amount4").style.display="none";
             document.getElementById("funcParam5").style.display="none";
             document.getElementById("amount5").style.display="none";
+            document.getElementById("funcParam6").style.display="none";
+            document.getElementById("amount6").style.display="none";
         }break;
         case 3:
         {
@@ -68,6 +77,8 @@ function mycalculator(num) {
             document.getElementById("funcParam4").innerHTML = "请输入债券面值"
             document.getElementById("funcParam5").style.display="none";
             document.getElementById("amount5").style.display="none";
+            document.getElementById("funcParam6").style.display="none";
+            document.getElementById("amount6").style.display="none";
         }break;
         case 4:
         {
@@ -80,11 +91,13 @@ function mycalculator(num) {
             document.getElementById("amount4").style.display="none";
             document.getElementById("funcParam5").style.display="none";
             document.getElementById("amount5").style.display="none";
+            document.getElementById("funcParam6").style.display="none";
+            document.getElementById("amount6").style.display="none";
         }break;
         case 5:
         {
 
-            document.getElementById('funcIntroduce').innerHTML = "DCF：利用未来现金流的现值来对公司进行估值。";
+            document.getElementById('funcIntroduce').innerHTML = "DCF：利用未来现金流的现值来对公司进行估值。若输入的现金流持续年限与输入的现金流年数不同, 则结果框里显示NaN, 此时需要重新输入.";
             document.getElementById('funcParam1').innerHTML = "请输入未来现金流持续年限";
             document.getElementById('funcParam2').innerHTML = "请输入每年产生的现金流, 分号间隔";
             document.getElementById('funcParam3').innerHTML = "请输入市场利率(小数形式)";
@@ -92,6 +105,8 @@ function mycalculator(num) {
             document.getElementById("amount4").style.display="none";
             document.getElementById("funcParam5").style.display="none";
             document.getElementById("amount5").style.display="none";
+            document.getElementById("funcParam6").style.display="none";
+            document.getElementById("amount6").style.display="none";
 
         }break;
         case 6:
@@ -105,6 +120,8 @@ function mycalculator(num) {
             document.getElementById("amount4").style.display="none";
             document.getElementById("funcParam5").style.display="none";
             document.getElementById("amount5").style.display="none";
+            document.getElementById("funcParam6").style.display="none";
+            document.getElementById("amount6").style.display="none";
 
         }break;
         case 7:
@@ -114,27 +131,33 @@ function mycalculator(num) {
             document.getElementById('funcParam2').innerHTML = "请输入以外币形式表现的未来现金流";
             document.getElementById('funcParam3').innerHTML = "请输入本国年利率(小数形式)";
             document.getElementById("funcParam4").innerHTML="请输入外国年利率(小数形式)";
-            document.getElementById("funcParam5").innerHTML="请输入即期汇率";
+            document.getElementById("funcParam5").innerHTML="请输入即期汇率(本币/外币)";
+            document.getElementById("funcParam6").style.display="none";
+            document.getElementById("amount6").style.display="none";
 
         }break;
         case 8:
         {
             document.getElementById('funcIntroduce').innerHTML = "货币市场对冲策略：这是一个有点复杂的三言两语讲不太清的方法。";
-            document.getElementById('funcParam1').innerHTML = "请输入未来流入现金流";
+            document.getElementById('funcParam1').innerHTML = "请输入未来流入外币现金流";
             document.getElementById('funcParam2').innerHTML = "预计几个月后收钱";
-            document.getElementById('funcParam3').innerHTML = "请输入即期汇率";
+            document.getElementById('funcParam3').innerHTML = "请输入即期汇率(人民币/外币)";
             document.getElementById("funcParam4").innerHTML="请输入外币借款利率(小数形式)";
             document.getElementById("funcParam5").innerHTML="请输入本币存款利率(小数形式)";
+            document.getElementById("funcParam6").style.display="none";
+            document.getElementById("amount6").style.display="none";
 
         }break;
         case 9:
         {
             document.getElementById('funcIntroduce').innerHTML = "货币市场对冲策略：这是一个有点复杂的三言两语讲不太清的方法。";
-            document.getElementById('funcParam1').innerHTML = "CF-未来流出现金流";
-            document.getElementById('funcParam2').innerHTML = "n-预计几个月后收钱";
-            document.getElementById('funcParam3').innerHTML = "spot rate-即期汇率";
-            document.getElementById("funcParam4").innerHTML="i1-外币存款利率(小数形式)";
-            document.getElementById("funcParam5").innerHTML="i2-本币借款利率(小数形式)";
+            document.getElementById('funcParam1').innerHTML = "请输入未来流出外币现金流";
+            document.getElementById('funcParam2').innerHTML = "预计几个月后付钱";
+            document.getElementById('funcParam3').innerHTML = "请输入即期汇率(人民币/外币)";
+            document.getElementById("funcParam4").innerHTML="请输入外币存款利率(小数形式)";
+            document.getElementById("funcParam5").innerHTML="请输入本币借款利率(小数形式)";
+            document.getElementById("funcParam6").style.display="none";
+            document.getElementById("amount6").style.display="none";
 
         }break;
         case 10:
@@ -145,25 +168,19 @@ function mycalculator(num) {
              document.getElementById('funcParam3').innerHTML = "请输入预计最小成本(小数形式)";
              document.getElementById("funcParam4").innerHTML="请输入预计最大成本(小数形式)";
              document.getElementById("funcParam5").innerHTML="请输入目前债券市场价";
+             document.getElementById("funcParam6").innerHTML="请输入赎回价";
 
         }
     }
-    // var paramS = new Array();
-    // paramS[0] = "Saab";
-    // paramS[1] = "Volvo";
-    // paramS[2] = "BMW";
-
-
-    // specialCalculat(paramS)
 }
 
-// 安全判断的输出
+// 进行安全判断的函数
 function printfError() {
-    alert('参数错误,参数不能为空或不能为0。请重新输入');
+    alert('参数错误,参数不能为空,不能小于等于0。请重新输入');
 }
 
+//进行各个功能的计算的函数
 function specialCalculat() {
-    // document.getElementById('funcParam2').innerHTML = "g-股息增长率";
 
     // 获取到input输入框里面的数据，并且把获取的字符串转成float类型
     var amount1=  parseFloat( document.getElementById('amount1').value);
@@ -171,22 +188,20 @@ function specialCalculat() {
     var amount3=  parseFloat(document.getElementById('amount3').value);
     var amount4=  parseFloat(document.getElementById('amount4').value);
     var amount5=  parseFloat(document.getElementById('amount5').value);
+    var amount6=  parseFloat(document.getElementById('amount6').value);
 
-    // 安全判断，所有函数的第一个和第二个参数均不能为0（或者为空）
-    if (amount1 == 0 || amount2 == 0 )
+    // 安全判断，所有函数的所有参数均不能小于等于0（或者为空）
+    if (amount1 == 0 || amount2 == 0 || amount3 == 0 || amount4 == 0|| amount5 == 0 || amount6 == 0)
     {
         printfError();
         return;
     }
+
+    //选择不同功能进行计算
     switch (functionNum)
     {
         case 1:
         {
-            if (amount3 == 0)
-            {
-                printfError();return;
-            }
-
             // 对应公式 Ke=[d0(1+g)/p0]+g
             var result = (amount1*(1+amount2)/amount3) + amount2;
 
@@ -196,10 +211,6 @@ function specialCalculat() {
         }break;
         case 2:
         {
-            if (amount3 == 0)
-            {
-                printfError();return;
-            }
             // 对应公式 Ke=Rf+β(Rm-Rf)
             var result = amount1+ amount3* (amount2 - amount1);
             document.getElementById('functionRusult').value = result.toFixed(2);
@@ -207,11 +218,11 @@ function specialCalculat() {
         case 3:
         {
             // 这里t-税率，必须要在 0 ~ 1 之间取值
-            if (amount2 >1 || amount2 <0 || amount3 == 0)
+            if (amount2 >1 || amount2 <0)
             {
-                printfError();return;
+                alert('参数错误,参数必须在0-1之间。请重新输入');
+                return;
             }
-
             // 对应公式 Kd=i*pv*(1-t)/p0
             var result = amount1*amount4*(1-amount2)/amount3;
             document.getElementById('functionRusult').value = result.toFixed(2);
@@ -239,67 +250,60 @@ function specialCalculat() {
         {
 
             // 对应公式 Value=P/E值*earnings
-            var result = amount1-amount2;
+            var result = amount1*amount2;
             document.getElementById('functionRusult').value = result.toFixed(2);
         }break;
         case 7:
         {
-            if (amount3 == 0||amount4 == 0||amount5 == 0)
-            {
-                printfError();return;
-            }
-            // 对应公式 forward rate=spot rate*[(1+i2*(n/12))/(1+i1*(n/12))]
-            var result = amount5 *((1+amount4*(amount1/12))/(1+amount3*(amount1/12)));
+            var result = amount2*amount5*((1+amount3*(amount1/12))/(1+amount4*(amount1/12)));
             document.getElementById('functionRusult').value = result.toFixed(2);
 
         }break;
         case 8:
         {
-            if (amount3 == 0||amount4 == 0||amount5 == 0)
-            {
-                printfError();return;
-            }
             // 对应公式
             // Current borrowing=CF/(1+i1*(n/12))	/*现在要借的外币*/
             // Domestic currency=current borrowing/spot rate      /*把借来的外币换成本币*/
             // Future domestic currency= Domestic currency*(1+i2*(n/12))
             var CB = amount1/(1+amount4*(amount2/12));
-            var DC = CB/amount3;
+            var DC = CB*amount3;
             var result = DC*(1+amount5*(amount2/12));
             document.getElementById('functionRusult').value = result.toFixed(2);
 
         }break;
         case 9:
         {
-            if (amount3 == 0||amount4 == 0||amount5 == 0)
-            {
-                printfError();return;
-            }
             // current lending=CF/(1+外币存款利率*(n/12));
             //domestic currency=current lending/spot rare;
             //future domestic currency=domestic currency*(1+本币借款利率*(n/12));
-
-           var CL = amount1/(amount4*(amount2/12));
-           var DC = CL/amount3;
+           var CL = amount1/(1+amount4*(amount2/12));
+           var DC = CL*amount3;
            var result = DC*(1+amount5*(amount2/12));
            document.getElementById('functionRusult').value = result.toFixed(2);
         }break;
         case 10:
         {
-          //用一个数组存放每年现金流流入
+
            var PVa = 0, PVb = 0, NPVa = 0, NPVb = 0;
-          //把每年现金流现值加起来
+          //把所有利息折现
            for(var i=0;i<amount2;i++)
            {
-              var myCFs = amount1;
-              PVa += myCFs/Math.pow((1+amount3),i+1);
-              NPVa = PVa - amount5;
-              PVb += myCFs/Math.pow((1+amount4),i+1);
-              NPVb = PVb - amount5;
+
+				PVa += amount1/Math.pow((1+amount3),i+1);
+				PVb += amount1/Math.pow((1+amount4),i+1);
 
            }
-            var result = amount3+(NPVa/(NPVb-NPVa))*(amount4-amount3);
-            document.getElementById('functionRusult').value = result.toFixed(2);
+           //利息现值加上赎回价的现值
+           var PVa1 = PVa + amount6/Math.pow((1+amount3),amount2);
+           var PVb1 = PVb + amount6/Math.pow((1+amount4),amount2);
+
+           //算出净现值
+            NPVa = PVa1 - amount5;
+            NPVb = PVb1 - amount5
+
+            //根据公式得到结果
+            var result = amount3+(NPVa/(NPVa-NPVb))*(amount4-amount3);
+            document.getElementById('functionRusult').value = result.toFixed(3);
         }break;
     }
 }
@@ -374,7 +378,7 @@ function equal(){
     result=0;
     numshow="0";
 }
-//
+//简单计算
 function calculate(){
     numshow=Number(document.calculator.numScreen.value);
     if(num!=0 && quit!=1){ //判断前一个运算数是否为零以及防重复按键的状态
